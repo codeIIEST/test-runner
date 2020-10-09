@@ -1,6 +1,5 @@
 Test-Runner
-
-====
+===========
 
 Test-Runner is a Go module which can be used to execute programs against particular
 test cases and get corresponding outputs. The goal is to provide an easy module
