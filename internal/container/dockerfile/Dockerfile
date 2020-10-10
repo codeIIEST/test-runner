@@ -1,2 +1,2 @@
 FROM alpine:latest
-apk add --update g++ gcc python python3 go
+RUN apk add --update g++ gcc go
