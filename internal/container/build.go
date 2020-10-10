@@ -13,7 +13,13 @@ import (
 	"github.com/docker/docker/client"
 )
 
-func buildImage(ctx context.Context, cli *client.Client) error {
+// BuildImage creates the required docker image
+func BuildImage(cli *client.Client, imageName string) error {
+	ctx := context.Background()
+	if cli == nil {
+		cli, _ = client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	}
+
 	buf := new(bytes.Buffer)
 	tw := tar.NewWriter(buf)
 	defer tw.Close()
@@ -25,11 +31,13 @@ func buildImage(ctx context.Context, cli *client.Client) error {
 		log.Fatal(err, " :unable to open Dockerfile")
 		return err
 	}
+
 	readDockerFile, err := ioutil.ReadAll(dockerFileReader)
 	if err != nil {
 		log.Fatal(err, " :unable to read dockerfile")
 		return err
 	}
+
 	tarHeader := &tar.Header{
 		Name: dockerFile,
 		Size: int64(len(readDockerFile)),
@@ -39,42 +47,36 @@ func buildImage(ctx context.Context, cli *client.Client) error {
 		log.Fatal(err, " :unable to write tar header")
 		return err
 	}
+
 	_, err = tw.Write(readDockerFile)
 	if err != nil {
 		log.Fatal(err, " :unable to write tar body")
 		return err
 	}
+
 	dockerFileTarReader := bytes.NewReader(buf.Bytes())
 
 	opt := types.ImageBuildOptions{
-		Tags:       []string{"runner"},
+		Tags:       []string{imageName},
 		CPUSetCPUs: "1",
 		Memory:     512 * 1024 * 1024,
 		ShmSize:    64,
 		Context:    dockerFileTarReader,
 		Dockerfile: dockerFile,
 	}
+
 	resp, err := cli.ImageBuild(ctx, dockerFileTarReader, opt)
 	if err != nil {
 		log.Fatal(err, " :unable to build docker image")
 		return err
 	}
 	defer resp.Body.Close()
+
 	_, err = io.Copy(os.Stdout, resp.Body)
 	if err != nil {
 		log.Fatal(err, " :unable to read image build response")
 		return err
 	}
+
 	return err
-}
-
-// CreateContainer builds several containers for running the code
-func CreateContainer() {
-	ctx := context.Background()
-	cli, _ := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
-
-	err := buildImage(ctx, cli)
-	if err != nil {
-		return
-	}
 }
