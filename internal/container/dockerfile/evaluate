@@ -1,0 +1,15 @@
+#!/bin/bash
+
+time=1
+mem=$((500*1024*1024))
+
+if [ ! -z $1 ];then
+    time=$1
+fi
+
+if [ ! -z $2 ];then
+    mem=$2
+fi
+
+/tests/timeout -t $time -m $mem -o /tests/data/stats.txt sudo -u nobody /tests/data/a.out 2>/dev/null 1>/tests/data/o.txt
+diff -tbB /tests/data/o.txt /tests/data/out.txt > /tests/data/res.txt
