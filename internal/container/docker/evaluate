@@ -1,0 +1,29 @@
+#!/bin/bash
+
+time=1
+mem=$((500*1024*1024))
+prog=/tests/data/a.out
+count=1
+
+# params
+# $1 -> count
+# $2 -> time limit in seconds
+# $3 -> memory limit in seconds
+
+if [ ! -z $1 ];then
+    count=$1
+fi
+if [ ! -z $2 ];then
+    time=$2
+fi
+if [ ! -z $3 ];then
+    mem=$3
+fi
+
+for (( i=1; i<=$count; i++ ))
+do
+    /tests/timeout -t $time -m $mem -o /tests/data/stats${i}.txt sudo -u nobody \
+        $prog < /tests/data/in${i}.txt 2>/dev/null 1>/tests/data/o${i}.txt
+    echo $? > /tests/data/exit_status${i}.txt
+    diff -tbB /tests/data/o${i}.txt /tests/data/out${i}.txt > /tests/data/diff${i}.txt
+done

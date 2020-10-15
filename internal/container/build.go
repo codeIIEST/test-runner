@@ -5,6 +5,8 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
+	"runtime"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
@@ -23,8 +25,9 @@ func BuildImage(cli *client.Client, imageName string) error {
 		cli, _ = client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	}
 
-	cwd, _ := os.Getwd()
-	dockerCtx := getContext(cwd + "/internal/container/dockerfile")
+	_, b, _, _ := runtime.Caller(0)
+	basepath := filepath.Dir(b)
+	dockerCtx := getContext(basepath + "/docker")
 
 	opt := types.ImageBuildOptions{
 		Tags:       []string{imageName},
