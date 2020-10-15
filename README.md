@@ -6,16 +6,53 @@ test cases and get corresponding outputs. The goal is to provide an easy module
 for testing programs for their correctness. This is one of the many modules
 required to create a completely functional backend for an "Online Judge".
 
-## Project Status
+- Runs programs in a completely isolated environment using containers
+- Set and record memory and time limits using cgroups
+- Easy to use interface
 
-The project is in its infancy. A brief roadmap to be completed includes:
+## Table of Contents
+1. [ Installation ](#install)
+2. [ Example ](#example)
+3. [ To-do ](#todo)
+4. [ Contributing ](#contrib)
 
-- Spawn containers to run jobs.
-- Evaluate programs and get output from containers.
-- Handle timeouts, errors, etc. Don't let containers die.
-- Schedule jobs against available containers.
+<a name="install"></a>
+## 1. Installation
 
-Other things before release:
+``` go get github.com/raydwaipayan/test-runner ```
 
-- Complete documentation for the project.
-- Unit tests for components.
+<a name="example"></a>
+## 2. Example
+
+```
+import (
+	"io/ioutil"
+	"log"
+	"github.com/raydwaipayan/test-runner/runner/run"
+)
+
+func test(code string, lang string, filename string)
+	in := []string{"2", "4", "5"}
+	out := []string{"4", "16", "25"}
+    timeLimit := 2              // Time in seconds
+    memLimit := 500*1024*1024   // Memory in bytes
+
+	res := run.Evaluate(code, lang, filename in, out,
+        len(in), timeLimit, memLimit)
+	log.Print(res)
+}
+```
+
+<a name="todo"></a>
+## 3. To-do
+
+- Limit Cpu count through cgroups (perhaps choose CPU?)
+- Support for more languages (compilation and run scripts)
+- Unit Tests
+- Makefile
+
+<a name="contrib"></a>
+## 4. Contributing
+
+Please use the issue tracker.
+All contributions are more than welcome :)
