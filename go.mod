@@ -11,9 +11,15 @@ require (
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/gogo/protobuf v1.3.1 // indirect
+	github.com/gorilla/mux v1.8.0 // indirect
+	github.com/moby/moby v1.13.1
 	github.com/moby/sys/mount v0.1.1 // indirect
+	github.com/moby/term v0.0.0-20200915141129-7f0af18e79f2 // indirect
+	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.1 // indirect
 	github.com/opencontainers/runc v0.1.1 // indirect
 	golang.org/x/net v0.0.0-20201009032441-dbdefad45b89 // indirect
+	golang.org/x/time v0.0.0-20200630173020-3af7569d3a1e // indirect
 	google.golang.org/grpc v1.33.0 // indirect
+	gotest.tools/v3 v3.0.3 // indirect
 )
