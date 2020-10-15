@@ -16,10 +16,11 @@ type TestData struct {
 
 // TestResult stores the evaluation data of the program
 type TestResult struct {
-	ID        string
-	Status    []string
-	Time      []float64
-	Memory    []float64
-	Error     string
-	TestError []string
+	ID      string
+	Status  string
+	Message string
+	Time    []float64
+	Memory  []float64
+	Result  []string
+	Error   []string
 }
