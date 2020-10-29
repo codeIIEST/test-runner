@@ -19,7 +19,7 @@ required to create a completely functional backend for an "Online Judge".
 <a name="install"></a>
 ## 1. Installation
 
-``` go get github.com/raydwaipayan/test-runner ```
+``` go get github.com/codeiiest/test-runner ```
 
 <a name="example"></a>
 ## 2. Example
@@ -28,7 +28,7 @@ required to create a completely functional backend for an "Online Judge".
 import (
 	"io/ioutil"
 	"log"
-	"github.com/raydwaipayan/test-runner/runner/run"
+	"github.com/codeiiest/test-runner/runner/run"
 )
 
 func test(code string, lang string, filename string)

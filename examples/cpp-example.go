@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"log"
 
-	"github.com/raydwaipayan/test-runner/runner/run"
+	"github.com/codeiiest/test-runner/runner/run"
 )
 
 func main() {

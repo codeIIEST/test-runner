@@ -7,8 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/codeiiest/test-runner/internal/container"
 	"github.com/docker/docker/client"
-	"github.com/raydwaipayan/test-runner/internal/container"
 )
 
 // TestData contains all test data related to the program

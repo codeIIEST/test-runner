@@ -3,9 +3,9 @@ package run
 import (
 	"log"
 
+	"github.com/codeiiest/test-runner/internal/container"
+	"github.com/codeiiest/test-runner/runner/tester"
 	"github.com/docker/docker/client"
-	"github.com/raydwaipayan/test-runner/internal/container"
-	"github.com/raydwaipayan/test-runner/runner/tester"
 )
 
 var cli *client.Client
