@@ -37,7 +37,7 @@ func test(code string, lang string, filename string)
 	timeLimit := 2              // Time in seconds
 	memLimit := 500*1024*1024   // Memory in bytes
 
-	res := run.Evaluate(code, lang, filename in, out,
+	res := run.Evaluate(code, lang, filename, in, out,
         len(in), timeLimit, memLimit)
 	log.Print(res)
 }
