@@ -90,7 +90,7 @@ func Compile(ctx context.Context, cli *client.Client, image string, lang string,
 	case "cpp":
 		eval = "g++ -w -O2 /tests/data/a.cpp -o /tests/data/a.out 2>&1"
 	}
-	fmt.Println(eval)
+
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: image,
 		Cmd:   []string{"/bin/bash", "-c", eval},
