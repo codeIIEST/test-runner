@@ -1,4 +1,4 @@
-package main
+package cpp
 
 import (
 	"io/ioutil"
@@ -7,9 +7,9 @@ import (
 	"github.com/codeiiest/test-runner/runner/run"
 )
 
-func main() {
-
-	dat, _ := ioutil.ReadFile("a.cpp")
+// Test is used to test CPP
+func Test() {
+	dat, _ := ioutil.ReadFile("samples/cpp/a.cpp")
 	in := []string{"2", "4", "5"}
 	out := []string{"4", "16", "25"}
 
