@@ -45,6 +45,8 @@ func Execute(ctx context.Context, cli *client.Client, image string, lang string,
 
 	eval := ""
 	switch lang {
+	case "c":
+		eval = fmt.Sprintf("/tests/evaluate %v %v %v", count, time, mem)
 	case "cpp":
 		eval = fmt.Sprintf("/tests/evaluate %v %v %v", count, time, mem)
 	}
@@ -83,10 +85,12 @@ func Compile(ctx context.Context, cli *client.Client, image string, lang string,
 
 	eval := ""
 	switch lang {
+	case "c":
+		eval = "gcc /tests/data/a.c -o /tests/data/a.out 2>&1"
 	case "cpp":
 		eval = "g++ -w -O2 /tests/data/a.cpp -o /tests/data/a.out 2>&1"
 	}
-
+	fmt.Println(eval)
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: image,
 		Cmd:   []string{"/bin/bash", "-c", eval},
