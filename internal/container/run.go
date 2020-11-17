@@ -49,6 +49,9 @@ func Execute(ctx context.Context, cli *client.Client, image string, lang string,
 		eval = fmt.Sprintf("/tests/evaluate %v %v %v", count, time, mem)
 	case "cpp":
 		eval = fmt.Sprintf("/tests/evaluate %v %v %v", count, time, mem)
+	case "py":
+		program := "python3 /tests/data/a.py 2>&1"
+		eval = fmt.Sprintf("/tests/evaluate %v %v %v %v", count, time, mem, program)
 	}
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{

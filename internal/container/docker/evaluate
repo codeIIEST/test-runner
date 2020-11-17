@@ -9,6 +9,7 @@ count=1
 # $1 -> count
 # $2 -> time limit in seconds
 # $3 -> memory limit in seconds
+# $4 -> program to run
 
 if [ ! -z $1 ];then
     count=$1
@@ -18,6 +19,9 @@ if [ ! -z $2 ];then
 fi
 if [ ! -z $3 ];then
     mem=$3
+fi
+if [ ! -z $4 ];then
+    prog=${@:4}
 fi
 
 for (( i=1; i<=$count; i++ ))
