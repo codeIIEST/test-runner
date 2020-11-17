@@ -11,7 +11,6 @@ import (
 
 func TestC(t *testing.T) {
 	t.Helper()
-
 	t.Run("C test with all ACCEPTED", func(t *testing.T) {
 		testDat, _ := ioutil.ReadFile("testdata/c/simple.c")
 		testIn := []string{"1", "2", "6969"}

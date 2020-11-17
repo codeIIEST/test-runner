@@ -11,7 +11,6 @@ import (
 
 func TestCPP(t *testing.T) {
 	t.Helper()
-
 	t.Run("CPP test with all ACCEPTED", func(t *testing.T) {
 		testDat, _ := ioutil.ReadFile("testdata/cpp/simple.cpp")
 		testIn := []string{"1", "2", "6969"}
