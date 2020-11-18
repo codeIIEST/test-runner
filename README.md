@@ -1,5 +1,4 @@
-Test-Runner
-===========
+# Test-Runner
 
 Test-Runner is a Go module which can be used to execute programs against particular
 test cases and get corresponding outputs. The goal is to provide an easy module
@@ -11,17 +10,21 @@ required to create a completely functional backend for an "Online Judge".
 - Easy to use interface
 
 ## Table of Contents
+
 1. [ Installation ](#install)
 2. [ Example ](#example)
 3. [ To-do ](#todo)
 4. [ Contributing ](#contrib)
+5. [ Working ](#working)
 
 <a name="install"></a>
+
 ## 1. Installation
 
-``` go get github.com/codeiiest/test-runner ```
+`go get github.com/codeiiest/test-runner`
 
 <a name="example"></a>
+
 ## 2. Example
 
 ```
@@ -31,7 +34,7 @@ import (
 	"github.com/codeiiest/test-runner/runner/run"
 )
 
-func test(code string, lang string, filename string)
+func test(code string, lang string, filename string){
 	in := []string{"2", "4", "5"}
 	out := []string{"4", "16", "25"}
 	timeLimit := 2              // Time in seconds
@@ -44,6 +47,7 @@ func test(code string, lang string, filename string)
 ```
 
 <a name="todo"></a>
+
 ## 3. To-do
 
 - Limit Cpu count through cgroups (perhaps choose CPU?)
@@ -52,7 +56,24 @@ func test(code string, lang string, filename string)
 - Makefile
 
 <a name="contrib"></a>
+
 ## 4. Contributing
 
 Please use the issue tracker.
 All contributions are more than welcome :)
+
+<a name="working"></a>
+
+## 5. Working
+
+The gist of this module is that it runs the code passed to it in a docker container, evaluates it by comparing the output of the sent program against the expected output.
+
+---
+
+- Code is first compiled using their respective compilers [here](./internal/container/run.go) in the function Compile(), or if it is interpreted, directly Run()
+
+- The compilation takes place inside the container via a [bind mounts](https://docs.docker.com/storage/bind-mounts/) and the executable is produced
+
+- That executable is then run with the [evaluate script](./internal/container/docker.evaluate) with parameters of time limit, memory limit, number of test cases, and finally the runner script, which depends on whether the language is compiled or interpreted (for example, directly run python scripts, but C/C++ needs compialtion)
+
+- For a thorough understanding of how to use this module, have a look at the tests created for each language.
