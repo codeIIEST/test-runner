@@ -1,4 +1,14 @@
-# Test-Runner
+<div align="center">
+	<a>
+		<img src="https://socialify.git.ci/codeiiest/test-runner/image?forks=1&issues=1&language=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Light" />
+	</a>
+	<br/>
+	<b>Test-Runner</b>
+	<br/>
+	<a href="https://goreportcard.com/report/github.com/codeiiest/test-runner">
+		<img src="https://goreportcard.com/badge/github.com/codeiiest/test-runner" alt="Go Report Card" />
+	</a>
+</div>	
 
 Test-Runner is a Go module which can be used to execute programs against particular
 test cases and get corresponding outputs. The goal is to provide an easy module
