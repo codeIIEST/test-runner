@@ -1,7 +1,7 @@
 #!/bin/bash
 
 time=1
-mem=$((500*1024*1024))
+mem=$((500 * 1024 * 1024))
 prog=/tests/data/a.out
 count=1
 
@@ -11,24 +11,30 @@ count=1
 # $3 -> memory limit in seconds
 # $4 -> program to run
 
-if [ ! -z $1 ];then
+if [ ! -z $1 ]; then
     count=$1
 fi
-if [ ! -z $2 ];then
+if [ ! -z $2 ]; then
     time=$2
 fi
-if [ ! -z $3 ];then
+if [ ! -z $3 ]; then
     mem=$3
 fi
-if [ ! -z $4 ];then
+if [ ! -z $4 ]; then
     prog=${@:4}
 fi
 
-for (( i=1; i<=$count; i++ ))
-do
+cat <<EOT >/tests/data/program.sh
+#!/bin/bash
+$prog
+EOT
+
+chmod a+x /tests/data/program.sh
+
+for ((i = 1; i <= $count; i++)); do
     runexec --timelimit $time --memlimit $mem --read-only-dir / \
         --output /tests/data/o${i}.txt --input /tests/data/in${i}.txt \
-        $prog > /tests/data/stats${i}.txt
+        /tests/data/program.sh >/tests/data/stats${i}.txt
     sed -i "1,6d" /tests/data/o${i}.txt
-    diff -tbB /tests/data/o${i}.txt /tests/data/out${i}.txt > /tests/data/diff${i}.txt
+    diff -tbB /tests/data/o${i}.txt /tests/data/out${i}.txt >/tests/data/diff${i}.txt
 done

@@ -74,6 +74,6 @@ The gist of this module is that it runs the code passed to it in a docker contai
 
 - The compilation takes place inside the container via a [bind mounts](https://docs.docker.com/storage/bind-mounts/) and the executable is produced
 
-- That executable is then run with the [evaluate script](./internal/container/docker.evaluate) with parameters of time limit, memory limit, number of test cases, and finally the runner script, which depends on whether the language is compiled or interpreted (for example, directly run python scripts, but C/C++ needs compialtion)
+- That executable is then run with the [evaluate script](./internal/container/docker/evaluate) with parameters of time limit, memory limit, number of test cases, and finally the runner script, which depends on whether the language is compiled or interpreted (for example, directly run python scripts, but C/C++ needs compialtion)
 
 - For a thorough understanding of how to use this module, have a look at the tests created for each language.
