@@ -49,6 +49,9 @@ func Execute(ctx context.Context, cli *client.Client, image string, lang string,
 		eval = fmt.Sprintf("/tests/evaluate %v %v %v", count, time, mem)
 	case "cpp":
 		eval = fmt.Sprintf("/tests/evaluate %v %v %v", count, time, mem)
+	case "java":
+		program := "java -cp /tests/data/ Main"
+		eval = fmt.Sprintf("/tests/evaluate %v %v %v %v", count, time, mem, program)
 	case "py":
 		program := "python3 /tests/data/a.py 2>&1"
 		eval = fmt.Sprintf("/tests/evaluate %v %v %v %v", count, time, mem, program)
@@ -92,6 +95,8 @@ func Compile(ctx context.Context, cli *client.Client, image string, lang string,
 		eval = "gcc /tests/data/a.c -o /tests/data/a.out 2>&1"
 	case "cpp":
 		eval = "g++ -w -O2 /tests/data/a.cpp -o /tests/data/a.out 2>&1"
+	case "java":
+		eval = "javac -d /tests/data/ -cp /tests/data/ /tests/data/Main.java 2>&1"
 	}
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
